@@ -1,0 +1,137 @@
+:root {
+  --primary: rgba(16, 69, 141, 0.83);
+  --bg: #010101;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  content: '';
+  content: none;
+  border-collapse: collapse;
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  background: url('/img/nusa1.jpg') no-repeat;
+  backdrop-filter: blur(7px);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg);
+  color: #fff;
+  overflow: hidden;
+}
+
+.contact-section {
+  width: 100%;
+  margin-top: 5.5rem;
+  display: flex;
+  flex-direction: column; /* Menyusun elemen dalam kolom */
+  align-items: center;
+  text-align: center; /* Teks menjadi tengah */
+}
+
+.contact-info {
+  color: var(--bg);
+  font-weight: 600;
+  max-width: 500px;
+  line-height: 65px;
+  font-size: 18px;
+  margin-top: 20px; /* Jarak atas dari informasi kontak ke formulir */
+}
+
+.contact-info i {
+  margin-right: 20px;
+  font-size: 25px;
+}
+
+.contact-form {
+  max-width: 500px; /* Lebar form diubah agar lebih sesuai dengan informasi kontak */
+}
+
+.contact-info,
+.contact-form {
+  flex: 1;
+  width: 100%; /* Lebar elemen sesuai dengan parentnya */
+}
+
+.contact-form h2 {
+  color: #fff;
+  font-size: 35px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 30px;
+  text-align: center; /* Teks menjadi tengah */
+}
+
+.contact-form .text-box,
+.contact-form textarea {
+  background: #000;
+  color: #fff;
+  border: none;
+  width: 100%; /* Lebar input 100% untuk tampilan yang sama */
+  height: 50px;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.contact-form .send-btn {
+  background: #2E94E3;
+  color: #fff;
+  border: none;
+  width: 120px;
+  height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  transition-property: background;
+  float: right;
+  margin-top: 10px;
+}
+
+.contact-form .send-btn:hover {
+  background: #0582E3;
+}
+
+/* Tambahkan gaya untuk label */
+.label-left {
+  text-align: left;
+  float: left;
+  font-weight: 400;
+  margin-top: 10px; 
+  font-size: 15px;
+  color: #fff; 
+  width: 100px; 
+}
+
+textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.data-success {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  max-width: 500px; 
+  margin-left: auto; 
+  margin-right: auto; 
+}

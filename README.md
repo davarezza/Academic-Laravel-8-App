@@ -13,5 +13,7 @@ User Authentication: Secure and customizable user authentication system.
 # Before Login and Register
 ![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/84eea3c1-7568-4322-b1f8-99b2bae73c45)
 # After Login
-![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/a62b242f-5ea5-4f60-95b8-83449cc79dd6)
+
+![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/4f0416dd-5db7-4156-aa6c-53d1fec462e9)
+
 After successfully logging in, you will notice a delightful transformation on the right-hand side of the screen. Your previously displayed username will gracefully transition into the name you provided during registration, creating a personalized and welcoming user experience.

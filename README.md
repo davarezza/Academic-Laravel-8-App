@@ -17,3 +17,12 @@ User Authentication: Secure and customizable user authentication system.
 ![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/4f0416dd-5db7-4156-aa6c-53d1fec462e9)
 
 After successfully logging in, you will notice a delightful transformation on the right-hand side of the screen. Your previously displayed username will gracefully transition into the name you provided during registration, creating a personalized and welcoming user experience.
+
+# About 
+Click this button to see creator profile.
+![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/1b8667cd-4ef4-44db-b609-5f92fba3e3fa)
+
+I'ts a page creator profile
+![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/b1c3b3f4-383c-4417-9502-57f504f0efb4)
+
+

@@ -2,25 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
 {
-    public function akademik() {
-        return view('laporan/akademik', [
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('laporan.nilai.index', [
             'active' => 'laporan'
-        ]);
+        ]); 
     }
 
-    public function sikap() {
-        return view('laporan/sikap', [
-            'active' => 'laporan'
-        ]);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
-    public function eskul() {
-        return view('laporan/eskul', [
-            'active' => 'laporan'
-        ]);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Nilai  $nilai
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Nilai $nilai)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Nilai  $nilai
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Nilai $nilai)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Nilai  $nilai
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Nilai $nilai)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Nilai  $nilai
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Nilai $nilai)
+    {
+        //
     }
 }

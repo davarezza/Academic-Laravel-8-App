@@ -41,6 +41,8 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'store']);
 
-Route::get('/laporan/akademik', [NilaiController::class, 'akademik'])->name('laporanA')->middleware('auth');
-Route::get('/laporan/sikap', [NilaiController::class, 'sikap'])->name('laporanB')->middleware('auth');
-Route::get('/laporan/eskul', [NilaiController::class, 'eskul'])->name('laporanC')->middleware('auth');
+Route::get('/laporan', function () {
+    return view('laporan.index', ['active' => 'laporan']);
+})->middleware('auth')->name('laporan');
+
+Route::resource('/laporan/nilai', NilaiController::class)->middleware('auth');

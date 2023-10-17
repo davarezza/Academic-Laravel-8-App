@@ -13,7 +13,10 @@
                 <li class="nav-item">
                     <a class="nav-link {{ ($active ==="about") ? 'active' : '' }}" href="{{ route('about') }}">About</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link {{ ($active ==="laporan") ? 'active' : '' }}" href="{{ route('laporan') }}">Laporan</a>
+                </li>
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ ($active ==="laporan") ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Laporan
                     </a>
@@ -24,7 +27,7 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('laporanC') }}">Nilai Ekstrakulikuler</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link {{ ($active === "contact" || $active === "message") ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
                 </li>

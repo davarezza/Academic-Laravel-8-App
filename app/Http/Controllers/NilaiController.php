@@ -26,7 +26,9 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        //
+        return view('laporan.nilai.create', [
+            'active' => 'laporan'
+        ]);
     }
 
     /**

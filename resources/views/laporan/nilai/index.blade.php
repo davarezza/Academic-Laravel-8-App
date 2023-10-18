@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-<title>Data Siswa - {{ config('app.name') }}</title>
+    <title>Data Siswa - {{ config('app.name') }}</title>
 @endsection
 
 @section('container')
@@ -20,29 +20,33 @@
                 <a href="{{ route('nilai.create') }}" class="btn btn-info mb-3">Tambahkan Nilai</a>
                 <table class="table">
                     <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Mapel</th>
-                        <th scope="col">Nilai</th>
-                        <th scope="col">Action</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Jurusan</th>
+                            <th scope="col">Nilai Akhir</th>
+                            <th scope="col">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>dava.jpg</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <button class="btn btn-danger">Delete</button>
-                            <button class="btn btn-info">Edit</button>
-                        </td>
-                      </tr>
+                        @foreach($grades as $key => $data)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $data->nama }}</td>
+                                <td>
+                                  <img src="{{ asset('fotosiswa/'.$data->foto) }}" alt="" style="width: 70px;">
+                                </td>
+                                <td>{{ $data->jurusan }}</td>
+                                <td>{{ $data->nilai }}</td>
+                                <td>
+                                    <button class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-info">Edit</button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
-                  </table>
+                </table>
             </main>
         </div>
     </div>

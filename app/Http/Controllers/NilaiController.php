@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Nilai;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
 class NilaiController extends Controller
@@ -14,9 +14,12 @@ class NilaiController extends Controller
      */
     public function index()
     {
+        $grades = Grade::all(); // Mengambil data dari model Grade (sesuai dengan model yang sesuai)
+
         return view('laporan.nilai.index', [
-            'active' => 'laporan'
-        ]); 
+            'active' => 'laporan',
+            'grades' => $grades, // Mengirimkan data grades ke view
+        ]);
     }
 
     /**
@@ -27,7 +30,7 @@ class NilaiController extends Controller
     public function create()
     {
         return view('laporan.nilai.create', [
-            'active' => 'laporan'
+            'active' => 'laporan',
         ]);
     }
 
@@ -39,16 +42,35 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nilai' => 'required|numeric',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        $data = Grade::create([
+            'nama' => $request->nama,
+            'nilai' => $request->nilai,
+            'jurusan' => $request->jurusan,
+            // tambahkan kolom lain yang perlu disimpan di sini
+        ]);
+    
+        if ($request->hasFile('foto')) {
+            $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
+            $data->foto = $request->file('foto')->getClientOriginalName();
+            $data->save();
+        }
+    
+        return redirect()->route('nilai.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Nilai  $nilai
+     * @param  \App\Models\Grade  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function show(Nilai $nilai)
+    public function show(Grade $grade)
     {
         //
     }
@@ -56,10 +78,10 @@ class NilaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Nilai  $nilai
+     * @param  \App\Models\Grade  $grade
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nilai $nilai)
+    public function edit(Grade $grade)
     {
         //
     }
@@ -68,10 +90,10 @@ class NilaiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Nilai  $nilai
+     * @param  \App\Models\Grade  $grade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nilai $nilai)
+    public function update(Request $request, Grade $grade)
     {
         //
     }
@@ -79,10 +101,10 @@ class NilaiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Nilai  $nilai
+     * @param  \App\Models\Grade  $grade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nilai $nilai)
+    public function destroy(Grade $grade)
     {
         //
     }

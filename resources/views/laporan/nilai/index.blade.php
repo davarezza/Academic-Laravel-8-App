@@ -17,7 +17,7 @@
                     <h1 class="h2">Data Siswa</h1>
                 </div>
                 <!-- Isi konten utama Anda di sini -->
-                <a href="{{ route('nilai.create') }}" class="btn btn-info mb-3">Tambahkan Nilai</a>
+                <a href="{{ route('nilai.create') }}" class="btn btn-info mb-3">Tambahkan Nilai +</a>
                 <table class="table">
                     <thead>
                         <tr>

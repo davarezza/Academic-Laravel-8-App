@@ -45,6 +45,7 @@ class NilaiController extends Controller
         $request->validate([
             'nama' => 'required',
             'nilai' => 'required|numeric',
+            'jurusan' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     

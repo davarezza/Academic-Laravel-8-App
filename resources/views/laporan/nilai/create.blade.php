@@ -23,28 +23,49 @@
                     <div class="col-lg-8">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" name="nama">
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
+                        @error('nama')
+                        <div class="invalid-feedback">
+                            Nama wajib diisi.
+                        </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="nilai" class="form-label">Nilai</label>
-                        <input type="number" class="form-control" id="nilai" name="nilai">
+                        <input type="number" class="form-control @error('nilai') is-invalid @enderror" id="nilai" name="nilai">
+                        @error('nilai')
+                        <div class="invalid-feedback">
+                            Nilai wajib diisi.
+                        </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="jurusan" class="form-label">Mata Pelajaran</label>
-                        <select class="form-select" id="jurusan" name="jurusan">
+                        <select class="form-select @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan">
+                            <option selected disabled>Pilih Jurusan</option>
                             <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
                             <option value="Teknik Komputer dan Jaringan">Teknik Komputer dan Jaringan</option>
                             <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
                             <option value="Teknik Mekatronika">Teknik Mekatronika</option>
                             <!-- Tambahkan mata pelajaran lain sesuai kebutuhan -->
                         </select>
+                        @error('jurusan')
+                        <div class="invalid-feedback">
+                            Jurusan wajib diisi.
+                        </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="foto" class="form-label">Foto Siswa</label>
-                        <input class="form-control" type="file" id="foto" name="foto">
+                        <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto">
+                        @error('foto')
+                        <div class="invalid-feedback">
+                            Foto wajib diisi.
+                        </div>
+                        @enderror
                     </div>
                 </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Tambah</button>
                 </form>
 
                 </main>

@@ -68,7 +68,7 @@ class NilaiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Grade  $nilai
+     * @param  \App\Models\Grade  $grade
      * @return \Illuminate\Http\Response
      */
     public function show(Grade $grade)
@@ -82,22 +82,40 @@ class NilaiController extends Controller
      * @param  \App\Models\Grade  $grade
      * @return \Illuminate\Http\Response
      */
-    public function edit(Grade $grade)
-    {
-        //
+    public function edit($id)
+{
+    $grade = Grade::findOrFail($id);
+    return view('laporan.nilai.edit', [
+        'active' => 'laporan',
+        'grade' => $grade
+    ]);
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'nama' => 'required',
+        'nilai' => 'required|numeric',
+        'jurusan' => 'required',
+        'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Anda dapat mengizinkan pembaruan foto menjadi opsional
+    ]);
+
+    $grade = Grade::findOrFail($id); // Menggunakan findOrFail untuk memastikan entitas dengan ID yang diberikan ada
+
+    $grade->nama = $request->nama;
+    $grade->nilai = $request->nilai;
+    $grade->jurusan = $request->jurusan;
+
+    if ($request->hasFile('foto')) {
+        $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
+        $grade->foto = $request->file('foto')->getClientOriginalName();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Grade  $grade
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Grade $grade)
-    {
-        //
-    }
+    $grade->save();
+
+    return redirect()->route('nilai.index')->with('success', 'Data berhasil diperbarui!');
+}
+
 
     /**
      * Remove the specified resource from storage.

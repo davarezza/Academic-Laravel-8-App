@@ -40,8 +40,8 @@
                                 <td>{{ $data->jurusan }}</td>
                                 <td>{{ $data->nilai }}</td>
                                 <td>
+                                    <a href="{{ route('nilai.edit', $data->id) }}" class="btn btn-info">Edit</a>
                                     <button class="btn btn-danger">Delete</button>
-                                    <button class="btn btn-info">Edit</button>
                                 </td>
                             </tr>
                         @endforeach

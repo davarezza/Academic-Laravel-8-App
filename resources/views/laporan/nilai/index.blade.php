@@ -2,9 +2,17 @@
 
 @section('title')
     <title>Data Siswa - {{ config('app.name') }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 @section('container')
+
+<style>
+    #toast-container {
+    top: 75px; /* Sesuaikan dengan nilai yang sesuai untuk menggeser toast ke bawah */
+}
+</style>
+
     <br><br><br>
     <div class="container-fluid">
         <div class="row">
@@ -50,4 +58,14 @@
             </main>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        @if (Session::has('success'))
+        toastr.options = {
+            "positionClass": "toast-top-right", // Atur posisi ke kanan atas
+        };
+        toastr.success("{{ Session::get('success') }}");
+        @endif
+    </script>    
 @endsection

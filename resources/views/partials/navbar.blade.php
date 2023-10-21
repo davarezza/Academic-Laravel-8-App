@@ -1,3 +1,9 @@
+<style>
+    .navbar {
+    z-index: 1000; /* Sesuaikan dengan nilai yang sesuai */
+}
+</style>
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
         <img src="{{ asset('img/logosmk.png') }}" class="rounded mx-auto d-block px-2" alt="..." height="50px">

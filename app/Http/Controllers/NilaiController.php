@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NilaiController extends Controller
 {
@@ -123,8 +124,26 @@ public function update(Request $request, $id)
      * @param  \App\Models\Grade  $grade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grade $grade)
+    public function destroy(Grade $grade, $id)
     {
-        //
-    }
+        $grade = Grade::find($id);
+    
+        if ($grade) {
+            // Hapus gambar jika ada
+            if ($grade->foto) {
+                $imagePath = public_path('fotosiswa/' . $grade->foto);
+                
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Hapus gambar dari direktori publik
+                }
+            }
+    
+            // Hapus data Grade
+            $grade->delete();
+    
+            return redirect()->route('nilai.index')->with('success', 'Data berhasil dihapus!');
+        } else {
+            return redirect()->route('nilai.index')->with('error', 'Data tidak ditemukan.');
+        }
+    }    
 }

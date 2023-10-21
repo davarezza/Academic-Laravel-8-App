@@ -49,7 +49,11 @@
                                 <td>{{ $data->nilai }}</td>
                                 <td>
                                     <a href="{{ route('nilai.edit', $data->id) }}" class="btn btn-info">Edit</a>
-                                    <button class="btn btn-danger">Delete</button>
+                                    <form action="{{ route('nilai.destroy', $data->id) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

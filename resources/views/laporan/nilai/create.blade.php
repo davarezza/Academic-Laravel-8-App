@@ -57,7 +57,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="foto" class="form-label">Foto Siswa</label>
-                        <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto">
+                        <input class="form-control @error('foto') is-invalid @enderror" type="file" id="foto" name="foto" aria-describedby="fotoHelp">
+                        <div id="fotoHelp" class="form-text">Usahakan menggunakan gambar/foto 1:1</div>
                         @error('foto')
                         <div class="invalid-feedback">
                             Foto wajib diisi.

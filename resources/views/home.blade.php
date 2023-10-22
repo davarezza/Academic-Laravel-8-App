@@ -5,6 +5,9 @@
 @endsection
 
 @section('container')
+<head>
+  <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+</head>
 <div class="row">
   <div class="col-md-12">
     <div class="position-relative">
@@ -36,42 +39,21 @@
 </div>
 </section>
 
-<h2 class="text-center"><b>Keunggulan</b></h2>
+<h2 class="text-center"><b>Data Siswa</b></h2>
 <hr class="mx-auto" style="width: 12%; border-width: 2px;">
 <hr class="mx-auto" style="width: 6%; border-width: 2px;"> <br>
 <div class="d-flex justify-content-center">
+@foreach ($grades as $key => $data)
+  
   <div class="card mx-4" style="width: 18rem;">
-    <img src="img/kurlara.webp" class="card-img-top" style="max-width: 100%;" alt="gambar">
+    <img src="{{ asset('fotosiswa/'.$data->foto) }}" class="card-img-top" alt="gambar">
     <div class="card-body">
-      <h5 class="card-title">Kurikulum berstandar Industri</h5>
-      <p class="card-text">Kurikulum SMKN 1 Purwosari disusun dengan berlandaskan pada perkembangan teknologi dan tren terkini di dunia industri...</p>
-      <a href="#" class="btn btn-primary">Read More...</a>
+      <h5 class="card-title">{{ $data->nama }}</h5>
+      <p class="card-text">Siswa ini berjurusan <b>{{ $data->jurusan }}</b> di SMKN 1 Purwosari dan memiliki nilai akhir <b>{{ $data->nilai }}</b></p>
+      <a href="{{ route('laporan') }}" class="btn btn-primary">Show More</a>
     </div>
   </div>
-  <div class="card mx-4" style="width: 18rem;">
-    <img src="img/prak.jpg" class="card-img-top" style="max-width: 100%;" alt="gambar">
-    <div class="card-body">
-      <h5 class="card-title">Praktek Kerja Industri</h5>
-      <p class="card-text">Siswa memiliki kesempatan untuk mengaplikasikan pengetahuan yang mereka peroleh di lingkungan nyata industri...</p>
-      <a href="#" class="btn btn-primary">Read More...</a>
-    </div>
-  </div>
-  <div class="card mx-4" style="width: 18rem;">
-    <img src="img/fasilitaslara.jpg" class="card-img-top" style="max-width: 100%;" alt="gambar">
-    <div class="card-body">
-      <h5 class="card-title">Fasilitas Lengkap</h5>
-      <p class="card-text">SMKN 1 Purwosari memiliki fasilitas lengkap yang mendukung proses pembelajaran dan pelatihan siswa. Mulai dari laboratorium modern, ...</p>
-      <a href="#" class="btn btn-primary">Read More...</a>
-    </div>
-  </div>
-  <div class="card mx-4" style="width: 18rem;">
-    <img src="img/growthlara.jpg" class="card-img-top" style="max-width: 100%;" alt="gambar">
-    <div class="card-body">
-      <h5 class="card-title">Pengembangan Karakter</h5>
-      <p class="card-text"> Selain fokus pada aspek akademik dan keterampilan teknis, SMKN 1 Purwosari juga memberikan perhatian khusus pada pengembangan karakter siswa...</p>
-      <a href="#" class="btn btn-primary">Read More...</a>
-    </div>
-  </div>
+  @endforeach
 </div> <br> <br>
 
 <h2 class="text-center"><b>Berita Terbaru</b></h2>

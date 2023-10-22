@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Http\Requests\ContactRequest;
-use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
     public function index() {
+        $grades = Grade::all();
+
         return view('home', [
-            'active' => 'home'
+            'active' => 'home',
+            'grades' => $grades
         ]);
     }
 

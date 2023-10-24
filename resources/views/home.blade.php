@@ -16,13 +16,12 @@
         <h5 class="text-white">Aplikasi Informasi Akademik</h5>
         <h5 class="text-white">SMKN 1 PURWOSARI</h5>
         <p class="text-white">Membangun Generasi Unggul melalui Pendidikan Berkualitas<br>sekaligus Mendidik serta Mempersiapkan Siswa untuk Meraih Kesuksesan</p> <br>
-        <button type="button" class="btn btn btn-danger tombol"><a href="#sekolah" style="text-decoration: none; color: #FFF;">Mulai Jelajah</a></button>
+        <button type="button" class="btn btn btn-danger tombol"><a href="#data" style="text-decoration: none; color: #FFF;">Mulai Jelajah</a></button>
       </div>
     </div>
   </div>
 </div> <br> <br>
 
-<section id="sekolah">
 <h2 class="text-center"><b>Tentang Sekolah</b></h2>
 <hr class="mx-auto" style="width: 22%; border-width: 2px;">
 <div class="container my-5">
@@ -37,8 +36,8 @@
     </div>
   </div>
 </div>
-</section>
 
+<section id="data">
 <h2 class="text-center"><b>Data Siswa</b></h2>
 <hr class="mx-auto" style="width: 12%; border-width: 2px;">
 <hr class="mx-auto" style="width: 6%; border-width: 2px;"> <br>
@@ -55,6 +54,7 @@
   </div>
   @endforeach
 </div> <br> <br>
+</section>
 
 <h2 class="text-center"><b>Berita Terbaru</b></h2>
 <hr class="mx-auto" style="width: 18%; border-width: 2px;"> <br>

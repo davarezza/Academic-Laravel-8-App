@@ -84,38 +84,46 @@ class NilaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-{
-    $grade = Grade::findOrFail($id);
-    return view('laporan.nilai.edit', [
-        'active' => 'laporan',
-        'grade' => $grade
-    ]);
-}
+        {
+            $grade = Grade::findOrFail($id);
+            return view('laporan.nilai.edit', [
+                'active' => 'laporan',
+                'grade' => $grade
+            ]);
+        }
 
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'nama' => 'required',
-        'nilai' => 'required|numeric',
-        'jurusan' => 'required',
-        'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Anda dapat mengizinkan pembaruan foto menjadi opsional
-    ]);
-
-    $grade = Grade::findOrFail($id); // Menggunakan findOrFail untuk memastikan entitas dengan ID yang diberikan ada
-
-    $grade->nama = $request->nama;
-    $grade->nilai = $request->nilai;
-    $grade->jurusan = $request->jurusan;
-
-    if ($request->hasFile('foto')) {
-        $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
-        $grade->foto = $request->file('foto')->getClientOriginalName();
-    }
-
-    $grade->save();
-
-    return redirect()->route('nilai.index')->with('success', 'Data berhasil diperbarui!');
-}
+        public function update(Request $request, $id)
+        {
+            $request->validate([
+                'nama' => 'required',
+                'nilai' => 'required|numeric',
+                'jurusan' => 'required',
+                'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            ]);
+        
+            $grade = Grade::findOrFail($id);
+        
+            // Cek apakah ada gambar baru yang dikirim
+            if ($request->hasFile('foto')) {
+                // Hapus gambar sebelumnya
+                $oldImagePath = public_path('fotosiswa/' . $grade->foto);
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+        
+                // Simpan gambar yang baru diunggah
+                $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
+                $grade->foto = $request->file('foto')->getClientOriginalName();
+            }
+        
+            $grade->nama = $request->nama;
+            $grade->nilai = $request->nilai;
+            $grade->jurusan = $request->jurusan;
+            $grade->save();
+        
+            return redirect()->route('nilai.index')->with('success', 'Data berhasil diperbarui!');
+        }
+        
 
 
     /**

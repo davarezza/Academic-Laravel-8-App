@@ -42,7 +42,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="foto" class="form-label">Foto Siswa</label>
-                            <input class="form-control" type="file" id="foto" name="foto">
+                            <input class="form-control" type="file" id="foto" name="foto" value="{{ $grade->foto }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambar" class="form-label"></label>
+                            <img src="{{ asset('fotosiswa/' . $grade->foto) }}" alt="Foto Sekarang" width="100">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>

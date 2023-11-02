@@ -22,7 +22,14 @@ After successfully logging in, you will notice a delightful transformation on th
 Click this button to see creator profile.
 ![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/1b8667cd-4ef4-44db-b609-5f92fba3e3fa)
 
-I'ts a page creator profile
-![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/b1c3b3f4-383c-4417-9502-57f504f0efb4)
+# CRUD
+Before you can crud with this website, what you have to do first is log in then go to the report page and select "Data Siswa" in the side navigation bar
+![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/63568095-9101-4653-bfd4-55a5fc390e9d)
+
+Create Data Form
+- Has a text field and dropdown list
+- Has added images
+![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/ae2ac20f-7e44-4346-8c0a-4888fb6c8508)
+
 
 

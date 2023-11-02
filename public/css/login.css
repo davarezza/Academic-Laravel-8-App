@@ -49,6 +49,10 @@ body {
     animation-delay: -3s;    
 }
 
+#toast-container {
+    top: 75px; /* Sesuaikan dengan nilai yang sesuai untuk menggeser toast ke bawah */
+}
+
 @keyframes animate {
     0% {
         transform: rotate(0deg);

@@ -19,7 +19,7 @@
     --bg-color: #354563;
     --second-bg-color: #323946;
     --text-color: #fff;
-    --main-color: #0ef;
+    --main-color: rgb(236, 6, 6);
 }
 
 body {
@@ -45,7 +45,7 @@ body {
 }
 
 span {
-    color: var(--main-color);
+    color: #0ef;
 }
 
 .home-content h1 {

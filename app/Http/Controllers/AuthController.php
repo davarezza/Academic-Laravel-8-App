@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,8 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            session()->flash('success', 'Login successful, enjoy the website!');
+
             return redirect()->intended('/');
         }
 
@@ -62,6 +65,8 @@ class AuthController extends Controller
         request()->session()->invalidate();
 
         request()->session()->regenerateToken();
+
+        session()->flash('success', 'Thank you for visiting this website');
 
         return redirect('/');
     }

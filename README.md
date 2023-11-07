@@ -31,9 +31,6 @@ Create Data Form
 - Has added images
 ![image](https://github.com/davarezza/Academic-Laravel-8-App/assets/132239881/ae2ac20f-7e44-4346-8c0a-4888fb6c8508)
 
-Delete data.
-Useful for deleting data and images in a folder that will be deleted based on the file name in the database
-
 Edit Data Form
 - Displays based on the selected ID
 - Displays previous image based on id

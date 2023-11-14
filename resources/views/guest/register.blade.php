@@ -13,33 +13,33 @@
     @csrf
     <h2>Register</h2>
     <div class="inputBox">
-      <input type="text" name="name" id="name" value="{{ old('name') }}" required>
+      <input type="text" name="name" id="name" value="{{ old('name') }}">
       <span>Name</span>
       <i></i>
     </div>
     @error('name')
-      <div class="alert alert-danger">{{ $message }}
+      <div class="alert alert-danger pesan">{{ $message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
   @enderror
     <div class="inputBox">
-      <input type="password" name="password" id="password" required>
+      <input type="password" name="password" id="password">
       <span>Password</span>
       <i></i>
   </div>
   @error('password')
-      <div class="alert alert-danger">{{ $message }}
+      <div class="alert alert-danger pesan">{{ $message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
   @enderror
   
   <div class="inputBox">
-      <input type="email" name="email" id="email" value="{{ old('email') }}" required>
+      <input type="email" name="email" id="email" value="{{ old('email') }}">
       <span>Email Address</span>
       <i></i>
   </div>
   @error('email')
-      <div class="alert alert-danger">{{ $message }}
+      <div class="alert alert-danger pesan">{{ $message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
   @enderror

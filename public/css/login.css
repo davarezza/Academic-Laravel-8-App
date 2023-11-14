@@ -11,26 +11,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     background: #e3e5e9;
 }
 
 .box {
     position: relative;
     width: 370px;
-    height: 450px;
+    margin-top: 15vh;
+    margin-bottom: 2vh;
+    /* min-height: 450px; */
+    height: auto;
     background: #574f4f;
     border-radius: 50px 5px;
     overflow: hidden;
+    /* flex-direction: column-reverse; */
 }
 
 .box::before {
     content: '';
     position: absolute;
-    top: -50%;
+    top: 0;
     left: -50%;
     width: 370px;
-    height: 450px;
+    min-height: 450px;
     background: linear-gradient(60deg,transparent, #45f3ff, #45f3ff);
     transform-origin: bottom right;
     animation: animate 6s linear infinite;
@@ -39,14 +43,18 @@ body {
 .box::after {
     content: '';
     position: absolute;
-    top: -50%;
+    top: 0;
     left: -50%;
     width: 370px;
-    height: 450px;
+    min-height: 450px;
     background: linear-gradient(60deg,transparent, #58b3f0, #58b3f0);
     transform-origin: bottom right;
     animation: animate 6s linear infinite;
     animation-delay: -3s;    
+}
+
+.pesan {
+    margin-top: 2vh;
 }
 
 #toast-container {
@@ -63,7 +71,7 @@ body {
 }
 
 form {
-    position: absolute;
+    position: relative;
     inset: 2px;
     border-radius: 50px 5px;
     background: #28292d;

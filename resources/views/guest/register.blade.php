@@ -18,9 +18,10 @@
       <i></i>
     </div>
     @error('name')
-      <div class="alert alert-danger pesan">{{ $message }}
+      {{-- <div class="alert alert-danger pesan">{{ $message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      </div> --}}
+      <p class="text-danger">{{ $message }}</p>
   @enderror
     <div class="inputBox">
       <input type="password" name="password" id="password">
@@ -28,9 +29,10 @@
       <i></i>
   </div>
   @error('password')
-      <div class="alert alert-danger pesan">{{ $message }}
+      {{-- <div class="alert alert-danger pesan">{{ $message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      </div> --}}
+      <p class="text-danger">{{ $message }}</p>
   @enderror
   
   <div class="inputBox">
@@ -39,9 +41,10 @@
       <i></i>
   </div>
   @error('email')
-      <div class="alert alert-danger pesan">{{ $message }}
+      {{-- <div class="alert alert-danger pesan">{{ $message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+      </div> --}}
+      <p class="text-danger">{{ $message }}</p>
   @enderror
   
     <input type="submit" value="Register">

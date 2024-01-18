@@ -18,16 +18,23 @@ class Handler extends ExceptionHandler
     ];
 
     protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
-        }
+{
+    if ($request->expectsJson()) {
+        return response()->json(['error' => 'Unauthenticated.'], 401);
+    }
 
+    // Check if the request is part of the API routes
+    $isApiRequest = $request->is('api/*');
+
+    if ($isApiRequest) {
         return response()->json([
             'status' => false,
             'error' => 'Anda belum login dan memasukkan token',
-        ],401);
+        ], 401);
     }
+
+    return redirect()->guest(route('login'));
+}
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.

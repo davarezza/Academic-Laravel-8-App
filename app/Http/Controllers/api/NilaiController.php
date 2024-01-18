@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Models\Grade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
@@ -85,31 +86,58 @@ class NilaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $dataNilai = Grade::find($id);
-        if (empty($dataNilai)) {
-            return response()->json([
-                'status' => false,
-                'data' => 'Data tidak ditemukan'
-            ], 404);
-        }
-
-        $rules = [
-            'nama' => 'required',
-            'nilai' => 'required|numeric',
-            'jurusan' => 'required|in:rekayasa perangkat lunak,teknik komputer dan jaringan,desain komunikasi visual,teknik mekatronika',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Gagal mengedit data',
-                'data' => $validator->errors()
-            ]);
-        }
+{
+    $dataNilai = Grade::find($id);
+    if (empty($dataNilai)) {
+        return response()->json([
+            'status' => false,
+            'data' => 'Data tidak ditemukan'
+        ], 404);
     }
+
+    $rules = [
+        'nama' => 'required',
+        'nilai' => 'required|numeric',
+        'jurusan' => 'required|in:rekayasa perangkat lunak,teknik komputer dan jaringan,desain komunikasi visual,teknik mekatronika',
+        'foto' => 'sometimes|string', // Ganti aturan validasi sesuai kebutuhan
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Gagal memasukkan data',
+            'data' => $validator->errors()
+        ], 400);
+    }
+
+    // Konversi base64 ke file dan simpan di server
+    if ($request->has('foto')) {
+        $base64Image = $request->input('foto');
+        $image = base64_decode($base64Image);
+
+        // Ganti 'uploads' dengan direktori yang sesuai di server Anda
+        $filePath = public_path('fotosiswa/') . 'image_' . time() . '.jpg';
+
+        // Simpan file di server
+        file_put_contents($filePath, $image);
+
+        // Simpan nama file di database
+        $dataNilai->foto = 'image_' . time() . '.jpg';
+    }
+
+    // Simpan data lainnya
+    $dataNilai->nama = $request->input('nama');
+    $dataNilai->nilai = $request->input('nilai');
+    $dataNilai->jurusan = $request->input('jurusan');
+    $dataNilai->save();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Berhasil mengedit data',
+    ], 200);
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -111,26 +111,7 @@ class NilaiController extends Controller
         ], 400);
     }
 
-    // Konversi base64 ke file dan simpan di server
-    if ($request->has('foto')) {
-        $base64Image = $request->input('foto');
-        $image = base64_decode($base64Image);
-
-        // Ganti 'uploads' dengan direktori yang sesuai di server Anda
-        $filePath = public_path('fotosiswa/') . 'image_' . time() . '.jpg';
-
-        // Simpan file di server
-        file_put_contents($filePath, $image);
-
-        // Simpan nama file di database
-        $dataNilai->foto = 'image_' . time() . '.jpg';
-    }
-
-    // Simpan data lainnya
-    $dataNilai->nama = $request->input('nama');
-    $dataNilai->nilai = $request->input('nilai');
-    $dataNilai->jurusan = $request->input('jurusan');
-    $dataNilai->save();
+   
 
     return response()->json([
         'status' => true,
@@ -147,6 +128,19 @@ class NilaiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dataNilai = Grade::find($id);
+        if (empty($dataNilai)) {
+            return response()->json([
+                'status' => false,
+                'data' => 'Data tidak ditemukan'
+            ], 404);
+        }
+
+        $dataNilai->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Sukses menghapus data'
+        ]);
     }
 }

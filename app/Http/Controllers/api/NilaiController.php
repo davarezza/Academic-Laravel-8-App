@@ -75,7 +75,19 @@ class NilaiController extends Controller
      */
     public function show($id)
     {
-        //
+        $dataNilai = Grade::find($id);
+        if (empty($dataNilai)) {
+            return response()->json([
+                'status' => false,
+                'data' => 'Data tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Data berhasil ditemukan',
+            'data' => $dataNilai,
+        ],200);
     }
 
     /**
@@ -99,7 +111,7 @@ class NilaiController extends Controller
         'nama' => 'required',
         'nilai' => 'required|numeric',
         'jurusan' => 'required|in:rekayasa perangkat lunak,teknik komputer dan jaringan,desain komunikasi visual,teknik mekatronika',
-        'foto' => 'sometimes|string', // Ganti aturan validasi sesuai kebutuhan
+        'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Add file validation rules
     ];
 
     $validator = Validator::make($request->all(), $rules);
@@ -111,13 +123,29 @@ class NilaiController extends Controller
         ], 400);
     }
 
-   
+    $dataNilai->nama = $request->nama;
+    $dataNilai->nilai = $request->nilai;
+    $dataNilai->jurusan = $request->jurusan;
+
+    if ($request->hasFile('foto')) {
+        // Delete existing photo if any
+        if ($dataNilai->foto) {
+            unlink('fotosiswa/' . $dataNilai->foto);
+        }
+
+        // Move and save the new photo
+        $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
+        $dataNilai->foto = $request->file('foto')->getClientOriginalName();
+    }
+
+    $dataNilai->save();
 
     return response()->json([
         'status' => true,
         'message' => 'Berhasil mengedit data',
     ], 200);
 }
+
 
 
     /**

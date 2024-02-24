@@ -26,7 +26,7 @@
                         <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}">
                         @error('nama')
                         <div class="invalid-feedback">
-                            Nama wajib diisi.
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
@@ -35,7 +35,7 @@
                         <input type="number" class="form-control @error('nilai') is-invalid @enderror" id="nilai" name="nilai">
                         @error('nilai')
                         <div class="invalid-feedback">
-                            Nilai wajib diisi.
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
@@ -51,7 +51,7 @@
                         </select>
                         @error('jurusan')
                         <div class="invalid-feedback">
-                            Jurusan wajib diisi.
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>
@@ -61,7 +61,7 @@
                         <div id="fotoHelp" class="form-text">Usahakan menggunakan gambar/foto 1:1</div>
                         @error('foto')
                         <div class="invalid-feedback">
-                            Foto wajib diisi.
+                            {{ $message }}
                         </div>
                         @enderror
                     </div>

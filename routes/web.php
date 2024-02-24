@@ -30,9 +30,6 @@ Route::get('/about', [GuestController::class, 'about'])->name('about');
 Route::get('/contact', [GuestController::class, 'contact'])->name('contact');
 Route::post('/contact', [GuestController::class, 'send']);
 Route::get('/message', [GuestController::class, 'message'])->name('message');
-// Route::post('/contact', function(App\Http\Requests\ContactRequest $request) {
-//     return back()->with('berhasil', 'Data Success');
-// });
 
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticate']);
@@ -45,4 +42,5 @@ Route::get('/laporan', function () {
     return view('laporan.index', ['active' => 'laporan']);
 })->middleware('auth')->name('laporan');
 
-Route::resource('/laporan/nilai', NilaiController::class)->middleware('auth');
+Route::resource('/laporan/nilai', NilaiController::class)->except(['index'])->middleware('userAkses:guru');
+Route::get('/laporan/nilai', [NilaiController::class, 'index'])->name('nilai.index')->middleware('auth');

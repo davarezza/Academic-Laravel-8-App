@@ -45,7 +45,7 @@ class NilaiController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nilai' => 'required|numeric',
+            'nilai' => 'required|numeric|max:100',
             'jurusan' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -96,7 +96,7 @@ class NilaiController extends Controller
         {
             $request->validate([
                 'nama' => 'required',
-                'nilai' => 'required|numeric',
+                'nilai' => 'required|numeric|max:100',
                 'jurusan' => 'required',
                 'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);

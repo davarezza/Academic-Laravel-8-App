@@ -4,7 +4,7 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active text-dark" href="{{ route('laporan') }}">
-                                Dashboard
+                                Dashboard <b class="text-uppercase">{{ auth()->user()->role }}</b>
                             </a> <hr>
                         </li>
                         <li class="nav-item">

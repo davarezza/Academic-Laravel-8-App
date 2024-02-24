@@ -25,7 +25,9 @@
                     <h1 class="h2">Data Siswa</h1>
                 </div>
                 <!-- Isi konten utama Anda di sini -->
+                @if (auth()->check() && auth()->user()->role == 'guru')
                 <a href="{{ route('nilai.create') }}" class="btn btn-info mb-3">Tambahkan Data</a>
+                @endif
                 <table class="table">
                     <thead>
                         <tr>
@@ -34,7 +36,9 @@
                             <th scope="col">Foto</th>
                             <th scope="col">Jurusan</th>
                             <th scope="col">Nilai Akhir</th>
+                            @if (auth()->check() && auth()->user()->role == 'guru')
                             <th scope="col">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +51,7 @@
                                 </td>
                                 <td>{{ $data->jurusan }}</td>
                                 <td>{{ $data->nilai }}</td>
+                                @if (auth()->check() && auth()->user()->role == 'guru')
                                 <td>
                                     <a href="{{ route('nilai.edit', $data->id) }}" class="btn btn-info">Edit</a>
                                     <form action="{{ route('nilai.destroy', $data->id) }}" method="post" class="d-inline">
@@ -55,6 +60,7 @@
                                         <button type="submit" class="btn btn-danger">Hapus</button>
                                     </form>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

@@ -52,7 +52,11 @@ class AuthController extends Controller
 
             session()->flash('success', 'Login successful, enjoy the website!');
 
-            return redirect()->intended('/');
+            if (Auth::user()->role == 'siswa') {
+                return redirect('/'); 
+            } elseif (Auth::user()->role == 'guru') {
+                return redirect('/laporan');
+            }
         }
 
         return back()->with('loginError', 'Login Failed');

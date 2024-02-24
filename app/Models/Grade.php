@@ -9,6 +9,11 @@ class Grade extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama', 'nilai', 'jurusan', 'foto'];
+    protected $fillable = ['nama', 'nilai', 'jurusan_id', 'foto'];
+
+    public function jurusans()
+    {
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
 
 }

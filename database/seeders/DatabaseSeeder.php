@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Jurusan;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -19,6 +20,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'naisa@gmail.com',
             'role' => 'guru',
             'password' => bcrypt('love'),
+        ]);
+
+        Jurusan::create([
+            'nama' => 'Rekayasa Perangkat Lunak',
+        ]);
+        Jurusan::create([
+            'nama' => 'Desain Komunikasi Visual',
         ]);
     }
 }

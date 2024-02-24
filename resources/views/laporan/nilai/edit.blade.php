@@ -32,13 +32,16 @@
                             <input type="number" class="form-control" id="nilai" name="nilai" value="{{ $grade->nilai }}">
                         </div>
                         <div class="mb-3">
-                            <label for="jurusan" class="form-label">Mata Pelajaran</label>
-                            <select class="form-select" id="jurusan" name="jurusan">
-                                <option value="Rekayasa Perangkat Lunak" {{ $grade->jurusan === 'Rekayasa Perangkat Lunak' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
-                                <option value="Teknik Komputer dan Jaringan" {{ $grade->jurusan === 'Teknik Komputer dan Jaringan' ? 'selected' : '' }}>Teknik Komputer dan Jaringan</option>
-                                <option value="Desain Komunikasi Visual" {{ $grade->jurusan === 'Desain Komunikasi Visual' ? 'selected' : '' }}>Desain Komunikasi Visual</option>
-                                <option value="Teknik Mekatronika" {{ $grade->jurusan === 'Teknik Mekatronika' ? 'selected' : '' }}>Teknik Mekatronika</option>
-                            </select>
+                            <label for="jurusan" class="form-label">Jurusan</label>
+                          <select class="form-select" name="jurusan_id">
+                            @foreach ( $jurusans as $jurusan )
+                            @if(old('jurusan_id', $jurusan->jurusan_id) == $jurusan->id)
+                              <option value="{{ $jurusan->id }}" selected>{{ $jurusan->nama }}</option>
+                            @else
+                              <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                              @endif
+                            @endforeach
+                          </select>
                         </div>
                         <div class="mb-3">
                             <label for="foto" class="form-label">Foto Siswa</label>

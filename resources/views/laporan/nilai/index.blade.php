@@ -49,7 +49,7 @@
                                 <td>
                                   <img src="{{ asset('fotosiswa/'.$data->foto) }}" alt="" style="width: 70px;">
                                 </td>
-                                <td>{{ $data->jurusan }}</td>
+                                <td>{{ $data->jurusans->nama }}</td>
                                 <td>{{ $data->nilai }}</td>
                                 @if (auth()->check() && auth()->user()->role == 'guru')
                                 <td>

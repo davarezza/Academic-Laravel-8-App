@@ -40,16 +40,17 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="jurusan" class="form-label">Mata Pelajaran</label>
-                        <select class="form-select @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan">
-                            <option selected disabled>Pilih Jurusan</option>
-                            <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
-                            <option value="Teknik Komputer dan Jaringan">Teknik Komputer dan Jaringan</option>
-                            <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
-                            <option value="Teknik Mekatronika">Teknik Mekatronika</option>
-                            <!-- Tambahkan mata pelajaran lain sesuai kebutuhan -->
-                        </select>
-                        @error('jurusan')
+                        <label for="jurusan" class="form-label">Jurusan</label>
+                      <select class="form-select" name="jurusan_id">
+                        @foreach ( $jurusans as $jurusan )
+                        @if(old('jurusan_id') == $jurusan->id)
+                          <option value="{{ $jurusan->id }}" selected>{{ $jurusan->nama }}</option>
+                        @else
+                          <option value="{{ $jurusan->id }}">{{ $jurusan->nama }}</option>
+                          @endif
+                        @endforeach
+                      </select>`
+                        @error('foto')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>

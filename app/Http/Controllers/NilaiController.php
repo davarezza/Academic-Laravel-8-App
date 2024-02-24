@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,11 +16,12 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $grades = Grade::all(); // Mengambil data dari model Grade (sesuai dengan model yang sesuai)
+        $grades = Grade::all();
 
         return view('laporan.nilai.index', [
             'active' => 'laporan',
-            'grades' => $grades, // Mengirimkan data grades ke view
+            'grades' => $grades,
+            'jurusans' => Jurusan::all(),
         ]);
     }
 
@@ -32,6 +34,7 @@ class NilaiController extends Controller
     {
         return view('laporan.nilai.create', [
             'active' => 'laporan',
+            'jurusans' => Jurusan::all(),
         ]);
     }
 
@@ -46,14 +49,14 @@ class NilaiController extends Controller
         $request->validate([
             'nama' => 'required',
             'nilai' => 'required|numeric|max:100',
-            'jurusan' => 'required',
+            'jurusan_id' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $data = Grade::create([
             'nama' => $request->nama,
             'nilai' => $request->nilai,
-            'jurusan' => $request->jurusan,
+            'jurusan_id' => $request->jurusan_id,
             // tambahkan kolom lain yang perlu disimpan di sini
         ]);
     
@@ -88,7 +91,8 @@ class NilaiController extends Controller
             $grade = Grade::findOrFail($id);
             return view('laporan.nilai.edit', [
                 'active' => 'laporan',
-                'grade' => $grade
+                'grade' => $grade,
+                'jurusans' => Jurusan::all(),
             ]);
         }
 
@@ -97,7 +101,7 @@ class NilaiController extends Controller
             $request->validate([
                 'nama' => 'required',
                 'nilai' => 'required|numeric|max:100',
-                'jurusan' => 'required',
+                'jurusan_id' => 'required',
                 'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
         
@@ -118,7 +122,7 @@ class NilaiController extends Controller
         
             $grade->nama = $request->nama;
             $grade->nilai = $request->nilai;
-            $grade->jurusan = $request->jurusan;
+            $grade->jurusan_id = $request->jurusan_id;
             $grade->save();
         
             return redirect()->route('nilai.index')->with('success', 'Data berhasil diperbarui!');

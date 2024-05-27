@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $dataUser = new User();
         $rules = [
             'name' => 'required|max:255',
@@ -40,7 +41,7 @@ class AuthController extends Controller
     }
 
     public function authenticate(Request $request)
-{
+    {
         $rules = [
             'email' => 'required|email',
             'password' => 'required',
@@ -69,6 +70,17 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'Berhasil login',
             'token' => $dataUser->createToken('api-product')->plainTextToken
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        // Revoke the token that was used to authenticate the current request
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil logout'
         ]);
     }
 }

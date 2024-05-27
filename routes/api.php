@@ -24,8 +24,9 @@ Route::post('register', [AuthController::class, 'store']);
 Route::post('login', [AuthController::class, 'authenticate']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
     Route::prefix('laporan')->group(function () {
-        Route::apiResource('nilai', NilaiController::class)->except(['update']);
-        Route::match(['put', 'post'], 'nilai/{id}', [\App\Http\Controllers\api\NilaiController::class, 'update']);
+        Route::apiResource('grade', NilaiController::class)->except(['update']);
+        Route::match(['put', 'post'], 'grade/{id}', [\App\Http\Controllers\api\NilaiController::class, 'update']);
     });
 });

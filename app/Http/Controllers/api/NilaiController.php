@@ -6,6 +6,9 @@ use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\JurusanResource;
+use App\Http\Resources\NilaiResource;
+use App\Models\Jurusan;
 use Illuminate\Support\Facades\Validator;
 
 class NilaiController extends Controller
@@ -17,7 +20,7 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $dataNilai = Grade::all();
+        $dataNilai = Grade::with('jurusans')->get();
         return response()->json([
             'status' => true,
             'message' => 'Data ditemukan',
@@ -38,7 +41,7 @@ class NilaiController extends Controller
         $rules = [
             'nama' => 'required',
             'nilai' => 'required|numeric',
-            'jurusan' => 'required|in:rekayasa perangkat lunak,teknik komputer dan jaringan,desain komunikasi visual,teknik mekatronika',
+            'jurusan_id' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
@@ -53,7 +56,7 @@ class NilaiController extends Controller
 
         $dataNilai->nama = $request->nama;
         $dataNilai->nilai = $request->nilai;
-        $dataNilai->jurusan = $request->jurusan;
+        $dataNilai->jurusan_id = $request->jurusan_id;
 
         if ($request->hasFile('foto')) {
             $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
@@ -73,9 +76,9 @@ class NilaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Grade $grade)
     {
-        $dataNilai = Grade::find($id);
+        $dataNilai = Grade::find($grade);
         if (empty($dataNilai)) {
             return response()->json([
                 'status' => false,
@@ -85,9 +88,9 @@ class NilaiController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Data berhasil ditemukan',
-            'data' => $dataNilai,
-        ],200);
+            'message' => 'Sukses menemukan data',
+            'data' => new NilaiResource($grade),
+        ], 200);
     }
 
     /**
@@ -98,53 +101,53 @@ class NilaiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $dataNilai = Grade::find($id);
-    if (empty($dataNilai)) {
-        return response()->json([
-            'status' => false,
-            'data' => 'Data tidak ditemukan'
-        ], 404);
-    }
-
-    $rules = [
-        'nama' => 'required',
-        'nilai' => 'required|numeric',
-        'jurusan' => 'required|in:rekayasa perangkat lunak,teknik komputer dan jaringan,desain komunikasi visual,teknik mekatronika',
-        'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Add file validation rules
-    ];
-
-    $validator = Validator::make($request->all(), $rules);
-    if ($validator->fails()) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Gagal memasukkan data',
-            'data' => $validator->errors()
-        ], 400);
-    }
-
-    $dataNilai->nama = $request->nama;
-    $dataNilai->nilai = $request->nilai;
-    $dataNilai->jurusan = $request->jurusan;
-
-    if ($request->hasFile('foto')) {
-        // Delete existing photo if any
-        if ($dataNilai->foto) {
-            unlink('fotosiswa/' . $dataNilai->foto);
+    {
+        $dataNilai = Grade::find($id);
+        if (empty($dataNilai)) {
+            return response()->json([
+                'status' => false,
+                'data' => 'Data tidak ditemukan'
+            ], 404);
         }
 
-        // Move and save the new photo
-        $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
-        $dataNilai->foto = $request->file('foto')->getClientOriginalName();
+        $rules = [
+            'nama' => 'required',
+            'nilai' => 'required|numeric',
+            'jurusan_id' => 'required',
+            'foto' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048', // Add file validation rules
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal memasukkan data',
+                'data' => $validator->errors()
+            ], 400);
+        }
+
+        $dataNilai->nama = $request->nama;
+        $dataNilai->nilai = $request->nilai;
+        $dataNilai->jurusan_id = $request->jurusan_id;
+
+        if ($request->hasFile('foto')) {
+            // Delete existing photo if any
+            if ($dataNilai->foto) {
+                unlink('fotosiswa/' . $dataNilai->foto);
+            }
+
+            // Move and save the new photo
+            $request->file('foto')->move('fotosiswa/', $request->file('foto')->getClientOriginalName());
+            $dataNilai->foto = $request->file('foto')->getClientOriginalName();
+        }
+
+        $dataNilai->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Berhasil mengedit data',
+        ], 200);
     }
-
-    $dataNilai->save();
-
-    return response()->json([
-        'status' => true,
-        'message' => 'Berhasil mengedit data',
-    ], 200);
-}
 
 
 
